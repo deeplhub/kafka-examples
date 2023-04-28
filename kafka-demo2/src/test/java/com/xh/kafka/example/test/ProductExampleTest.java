@@ -25,9 +25,18 @@ public class ProductExampleTest {
 
     @Test
     @SneakyThrows
-    public void sendMsg() {
+    public void one() {
         // 这里Topic如果不存在，会自动创建
-        kafkaTemplate.send("test_topic", "测试消息...");
+        kafkaTemplate.send("one_topic", "测试消息...");
+        // 阻塞等待，保证消费
+        new CountDownLatch(1).await();
+    }
+
+    @Test
+    @SneakyThrows
+    public void two() {
+        // 这里Topic如果不存在，会自动创建
+        kafkaTemplate.send("two_topic", "测试消息...");
         // 阻塞等待，保证消费
         new CountDownLatch(1).await();
     }
