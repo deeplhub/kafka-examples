@@ -18,6 +18,7 @@
         <module>kafka-demo7</module>
         <module>kafka-demo8</module>
         <module>kafka-demo9</module>
+        <module>kafka-demo10</module>
     </modules>
 
     <properties>
