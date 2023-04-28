@@ -1,0 +1,18 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.200.11:9092
+    #消费者的配置
+    consumer:
+      #在/usr/local/etc/kafka/consumer.properties中有配置
+      group-id: test_group
+      # false 取消自动提交
+      enable-auto-commit: false
+      listener:
+        # listener类型为单条记录single类型（默认为single单条消费模式）
+        type: single
+        # 已消费offset提交模式（仅在enable-auto-commit=false时才需明确指定）
+        # 单记录  | 批量         | 超时  | 超过消费数量 | 超时或超过数量 | 手动提交（ack）后同BATCH | 手动立即提交
+        # RECORD | BATCH（默认） | TIME | COUNT      | COUNT_TIME   | MANUAL                | MANUAL_IMMEDIATE
+        # 注：listener自动提交offset模式包括：RECORD | BATCH | TIME | COUNT | COUNT_TIME ，
+        #    且使用相关自动模式不可在@KafkaListener标注方法中使用Acknowledgment参数
+        ack-mode: MANUAL

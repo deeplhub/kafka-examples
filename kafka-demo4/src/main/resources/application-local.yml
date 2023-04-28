@@ -2,8 +2,14 @@ spring:
   kafka:
     bootstrap-servers: 192.168.200.11:9092
     producer:
-      transaction-id-prefix: kafka_tx.
+      # 重试次数
+      retries: 3
+      # 应答级别:多少个分区副本备份完成时向生产者发送ack确认(可选0、1、all/-1)
+      acks: -1
+      transaction-id-prefix: tx.
     #消费者的配置
     consumer:
       #在/usr/local/etc/kafka/consumer.properties中有配置
       group-id: test_group
+      properties:
+        isolation.level: read_committed

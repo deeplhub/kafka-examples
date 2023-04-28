@@ -9,7 +9,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>kafka-demo3</artifactId>
+    <artifactId>kafka-demo8</artifactId>
 
     <dependencies>
         <dependency>
