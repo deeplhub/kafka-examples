@@ -1,0 +1,9 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.200.11:9092
+    producer:
+      transaction-id-prefix: kafka_tx.
+    #消费者的配置
+    consumer:
+      #在/usr/local/etc/kafka/consumer.properties中有配置
+      group-id: test_group
