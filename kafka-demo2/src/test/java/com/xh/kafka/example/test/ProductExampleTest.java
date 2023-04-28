@@ -41,4 +41,15 @@ public class ProductExampleTest {
         new CountDownLatch(1).await();
     }
 
+    @Test
+    @SneakyThrows
+    public void three() {
+        // 这里Topic如果不存在，会自动创建
+        kafkaTemplate.send("topic1", "测试消息1...");
+        kafkaTemplate.send("topic2", "测试消息2...");
+        kafkaTemplate.send("topic3", "测试消息3...");
+        // 阻塞等待，保证消费
+        new CountDownLatch(1).await();
+    }
+
 }
