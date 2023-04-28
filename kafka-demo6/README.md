@@ -1,4 +1,14 @@
-Ack模式 - 单记录消费手动确认
+# Ack模式 - 单记录消费手动提交 offset （ack）
+
+默认情况下，Kafka 会自动帮我们提交 offset，但是这样做容易导致消息重复消费或消失丢失：
+
+在消费者收到消息之后，且 kafka 未自动提交 offset 之前，broker 宕机了，然后重启 broker，此时消费者会从原来的 offset 开始消费，于是出现了重复消费； 
+
+在消费者收到消息之后，且消费者还没有处理完消息时，由于自动提交的间隔时间到了，于是 kafka 自动提交了 offset，但是之后消费者又挂掉了，那么当消费者重启之后，会从下一个 offset 开始消费，这样前面的消息就丢失了。 
+
+我们可以改为使用手动提交 offset。
+
+<br>
 
 
 Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.type配置）：
@@ -7,9 +17,7 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 * batch - 批量消费消息列表
 
 
-
 <br>
-
 
 
 每种模式都分为2种提交已消费消息offset的ack模式：
@@ -38,12 +46,8 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 
 
 
-
-
 <br>
 <br>
-<br>
-
 
 
 # ack-mode设置
@@ -56,6 +60,24 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 
 <br>
 <br>
+
+
+## 关于消费者提交已消费消息offset的相关配置说明：
+
+spring.kafka.consumer.enbable-auto-commit
+
+- true 自动提交已消费消息offset
+
+auto-commit-interval 设置自动提交间隔
+
+- fasle 由程序控制已消费消息offset提交
+
+spring.kafka.listener.ack-mode 已消费offset提交模式
+
+
+
+<br>
+<br>
 <br>
 
 
@@ -63,3 +85,4 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 > 注意
 
 不能再配置中既配置 kafka.consumer.enable-auto-commit=true 自动提交，然后又在监听器中使用手动提交
+
