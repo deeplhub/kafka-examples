@@ -9,6 +9,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.concurrent.FailureCallback;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.SuccessCallback;
 
@@ -30,7 +31,7 @@ public class ProductExampleTest {
     @Test
     @SneakyThrows
     public void one() {
-        // 这里Topic如果不存在，会自动创建
+        // 异步获取
         kafkaTemplate.send("one_topic", "测试消息...").addCallback(successCallback -> {
             // 消息发送到的topic
             String topic = successCallback.getRecordMetadata().topic();
@@ -49,7 +50,7 @@ public class ProductExampleTest {
     @Test
     @SneakyThrows
     public void two() {
-        // 这里Topic如果不存在，会自动创建
+        // 异步获取
         kafkaTemplate.send("two_topic", "测试消息...").addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
             public void onFailure(Throwable throwable) {
@@ -61,6 +62,19 @@ public class ProductExampleTest {
                 log.info("发送消息成功，{} - {} -{}", result.getRecordMetadata().topic(), result.getRecordMetadata().partition(), result.getRecordMetadata().offset());
             }
         });
+        // 阻塞等待，保证消费
+        new CountDownLatch(1).await();
+    }
+
+    @Test
+    @SneakyThrows
+    public void three() {
+        // 同步获取
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send("three_topic", "测试消息...");
+        SendResult<String, String> result = future.get();
+
+        log.info("发送消息成功，{} - {} -{}", result.getRecordMetadata().topic(), result.getRecordMetadata().partition(), result.getRecordMetadata().offset());
+
         // 阻塞等待，保证消费
         new CountDownLatch(1).await();
     }
