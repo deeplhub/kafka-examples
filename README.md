@@ -17,7 +17,7 @@
 | 8   | [kafka-demo8](./kafka-demo8)   | Ack模式 - 批量消费手动提交 offset （ack）  |
 | 9   | [kafka-demo9](./kafka-demo9)   | 转发消息                           |
 | 10  | [kafka-demo10](./kafka-demo10) | 获取消息回复                         |
-| 11  | [kafka-demo11](./kafka-demo11) |                                |
+| 11  | [kafka-demo11](./kafka-demo11) | 序列化/反序列化                       |
 | 12  | [kafka-demo12](./kafka-demo12) |                                |
 | 13  | [kafka-demo13](./kafka-demo13) |                                |
 | 14  | [kafka-demo14](./kafka-demo14) |                                |
