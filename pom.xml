@@ -21,6 +21,12 @@
         <module>kafka-demo10</module>
         <module>kafka-demo11</module>
         <module>kafka-demo12</module>
+        <module>kafka-demo13</module>
+        <module>kafka-demo14</module>
+        <module>kafka-demo15</module>
+       <!-- <module>kafka-demo16</module>
+        <module>kafka-demo17</module>
+        <module>kafka-demo18</module>-->
     </modules>
 
     <properties>

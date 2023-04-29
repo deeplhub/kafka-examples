@@ -19,17 +19,14 @@
 | 10  | [kafka-demo10](./kafka-demo10) | 获取消息回复                         |
 | 11  | [kafka-demo11](./kafka-demo11) | 序列化/反序列化                       |
 | 12  | [kafka-demo12](./kafka-demo12) | 多方法处理消息                        |
-| 13  | [kafka-demo13](./kafka-demo13) |                                |
+| 13  | [kafka-demo13](./kafka-demo13) |  异常处理                              |
 | 14  | [kafka-demo14](./kafka-demo14) |                                |
 
 https://cloud.tencent.com/developer/article/1542310
 
-序列化 / 反序列化
-多方法处理消息
-异常处理
-并发接收消息
+
 暂停与恢复消费
-消息重试与死信队列
+
 拦截器
 消息过滤器
 生产者分区
