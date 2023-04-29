@@ -5,14 +5,14 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.springframework.kafka.listener.KafkaListenerErrorHandler;
 import org.springframework.kafka.listener.ListenerExecutionFailedException;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * @author H.Yang
  * @date 2023/4/29
  */
 @Slf4j
-@Service
+@Component
 public class CustomKafkaListenerErrorHandler implements KafkaListenerErrorHandler {
     @Override
     public Object handleError(Message<?> message, ListenerExecutionFailedException exception) {

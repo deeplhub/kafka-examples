@@ -7,6 +7,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       # 反序列化value的类
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      # 发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
       retries: 1
     #消费者的配置
     consumer:

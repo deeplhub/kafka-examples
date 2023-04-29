@@ -2,9 +2,12 @@ spring:
   kafka:
     bootstrap-servers: 192.168.200.11:9092
     producer:
-      # 重试次数
+      # 发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
       retries: 3
-      # 应答级别:多少个分区副本备份完成时向生产者发送ack确认(可选0、1、all/-1)
+      # acks 应答机制
+      # acks=0 ： 生产者发送过来的数据，不需要等数据落盘应答。
+      # acks=1 ： 生产者发送过来的数据，Leader 收到数据后应答。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
       acks: -1
       transaction-id-prefix: tx.
     #消费者的配置

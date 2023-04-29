@@ -19,15 +19,80 @@
 | 10  | [kafka-demo10](./kafka-demo10) | 获取消息回复                         |
 | 11  | [kafka-demo11](./kafka-demo11) | 序列化/反序列化                       |
 | 12  | [kafka-demo12](./kafka-demo12) | 多方法处理消息                        |
-| 13  | [kafka-demo13](./kafka-demo13) |  异常处理                              |
-| 14  | [kafka-demo14](./kafka-demo14) |                                |
+| 13  | [kafka-demo13](./kafka-demo13) | 异常处理                           |
+| 14  | [kafka-demo14](./kafka-demo14) | 消息重试与死信队列(@Bean)               |
+| 15  | [kafka-demo15](./kafka-demo15) | 消息重试与死信队列（注解）                  |
 
-https://cloud.tencent.com/developer/article/1542310
 
 
-暂停与恢复消费
+<br>
+<br>
+<br>
 
-拦截器
-消息过滤器
-生产者分区
-定时启动、停止监听器
+
+
+
+
+## 生产者如何提高吞吐量
+
+增加分区
+
+```yaml
+# 批次大小，默认 16K
+batch-size: 16384
+# 等待时间，默认 0
+linger.ms: 5
+# 缓冲区大小，默认 32M
+buffer-memory: 33554432
+# 压缩，默认 none，可配置值 gzip、snappy、lz4 和 zstd 
+compression-type: "snappy"
+```
+
+
+<br>
+<br>
+
+
+
+## 生产者数据可靠
+
+数据完全可靠条件 = ACK级别设置为-1 + 分区副本大于等于2 + ISR里应答的最小副本数量大于等于2 
+
+幂等性（参数 enable.idempotence 默认为 true）、事务
+
+
+<br>
+<br>
+
+
+
+## 消费者如何提高吞吐量
+
+增加分区消费，消费者数 = 分区数。同一个消费组下一个分区只能由一个消费者消费
+
+提高每批次拉取的数量，批次拉取数据过少（拉取数据/处理时间 < 生产速度），使处理的数据小于生产的数据，也会造成数据积压。
+
+
+
+<br>
+<br>
+
+
+
+## 重复消费和漏消费
+
+如果想完成Consumer端的精准一次性消费，那么需要Kafka消费端将消费过程和提交offset（手动提交）过程做原子绑定。此时我们需要将Kafka的offset保存到支持事务的自定义介质（比如MySQL）
+
+
+
+## 参考地址：
+
+* [Kafka发送消息和消费消息的方式](https://blog.csdn.net/qq_37958845/article/details/105675131)
+* [Kafka重试机制](https://www.51cto.com/article/722619.html)
+* [Spring Kafka：Retry Topic、DLT 的使用与原理](https://zhuanlan.zhihu.com/p/554967177)
+* [Spring-retry 使用指南](https://bbs.huaweicloud.com/blogs/360085)
+* [kafka 安装使用 /springboot整合kafka /消息投递机制以及存储策略 /副本处理机制](https://blog.csdn.net/qq_41463655/article/details/125180597)
+* [Spring Kafka Retry Topic DLT 的理解](https://juejin.cn/post/7208771469928038459)
+* [spring kafka简介及使用参考（四）](https://shiker.tech/archives/39#4.2.-%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%87%8D%E8%AF%95)
+* [Kafka生产者原理与流程_带实操代码](https://blog.csdn.net/manformer/article/details/129963130)
+* [Spring Boot 集成 Kafka](https://codearea.cc/post/Spring%20Boot%20%E9%9B%86%E6%88%90%20Kafka)

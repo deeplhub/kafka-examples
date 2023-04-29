@@ -11,9 +11,12 @@ spring:
     producer:
       #这个参数可以是任意字符串，它是broker用来识别消息是来自哪个客户端的。在broker进行打印日志、衡量指标或者配额限制时会用到。
       clientId: ${spring.application.name} #方便kafkaserver打印日志定位请求来源
-      # 0-不应答。1-leader 应答。all-所有 leader 和 follower 应答。
+      # acks 应答机制
+      # acks=0 ： 生产者发送过来的数据，不需要等数据落盘应答。
+      # acks=1 ： 生产者发送过来的数据，Leader 收到数据后应答。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
       acks: 1
-      # 发送失败时，重试发送的次数
+      # 发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
       retries: 3
     #消费者的配置
     consumer:
