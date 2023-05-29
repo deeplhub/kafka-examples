@@ -25,6 +25,7 @@
         <module>kafka-demo14</module>
         <module>kafka-demo15</module>
         <module>kafka-demo16</module>
+        <module>kafka-demo17</module>
     </modules>
 
     <properties>
@@ -41,6 +42,7 @@
         <maven.javadoc.skip>true</maven.javadoc.skip>
 
         <spring-boot-dependencies.version>2.3.12.RELEASE</spring-boot-dependencies.version>
+        <spring-cloud-bootstrap.version>4.0.0</spring-cloud-bootstrap.version>
 
         <lombok.version>1.18.24</lombok.version>
         <hutool-all.version>5.8.5</hutool-all.version>
@@ -73,6 +75,23 @@
             <version>${hutool-all.version}</version>
         </dependency>
 
+<!--        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version>${spring-cloud-bootstrap.version}</version>
+        </dependency>-->
+
+<!--        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <version>4.0.0</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5-fluent</artifactId>
+            <version>5.2.1</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -5,24 +5,27 @@
 
 ## 项目
 
-| #   | 目录                             | 说明                             |
-|-----|--------------------------------|--------------------------------|
-| 1   | [kafka-demo1](./kafka-demo1)   | 原生用例                           |
-| 2   | [kafka-demo2](./kafka-demo2)   | 简单发送/接收消息                      |
-| 3   | [kafka-demo3](./kafka-demo3)   | 发送消息时获取发送结果                    |
-| 4   | [kafka-demo4](./kafka-demo4)   | 发送事务消息                         |
-| 5   | [kafka-demo5](./kafka-demo5)   | Ack模式 - 单记录消费自动提交 offset       |
-| 6   | [kafka-demo6](./kafka-demo6)   | Ack模式 - 单记录消费手动提交 offset （ack） |
-| 7   | [kafka-demo7](./kafka-demo7)   | Ack模式 - 批量消费自动提交 offset （ack）  |
-| 8   | [kafka-demo8](./kafka-demo8)   | Ack模式 - 批量消费手动提交 offset （ack）  |
-| 9   | [kafka-demo9](./kafka-demo9)   | 转发消息                           |
+| #   | 目录           | 说明                             |
+|-----|-------------------------------|--------------------------------|
+| 1   | [kafka-demo1](./kafka-demo1)  | 原生用例                           |
+| 2   | [kafka-demo2](./kafka-demo2)  | 简单发送/接收消息                      |
+| 3   | [kafka-demo3](./kafka-demo3)  | 发送消息时获取发送结果(同步/异步)             |
+| 4   | [kafka-demo4](./kafka-demo4)  | 发送事务消息                         |
+| 5   | [kafka-demo5](./kafka-demo5)  | Ack模式 - 单记录消费自动提交 offset       |
+| 6   | [kafka-demo6](./kafka-demo6)  | Ack模式 - 单记录消费手动提交 offset （ack） |
+| 7   | [kafka-demo7](./kafka-demo7)  | Ack模式 - 批量消费自动提交 offset （ack）  |
+| 8   | [kafka-demo8](./kafka-demo8)  | Ack模式 - 批量消费手动提交 offset （ack）  |
+| 9   | [kafka-demo9](./kafka-demo9)  | 转发消息                           |
 | 10  | [kafka-demo10](./kafka-demo10) | 获取消息回复                         |
 | 11  | [kafka-demo11](./kafka-demo11) | 序列化/反序列化                       |
 | 12  | [kafka-demo12](./kafka-demo12) | 多方法处理消息                        |
 | 13  | [kafka-demo13](./kafka-demo13) | 异常处理                           |
 | 14  | [kafka-demo14](./kafka-demo14) | 消息重试与死信队列(@Bean)               |
 | 15  | [kafka-demo15](./kafka-demo15) | 消息重试与死信队列（注解）                  |
-
+| 16  | 待完成 | 二次封装                           |
+| 16  | 待完成 | stream                         |
+| 16  | 待完成 | 架构封装                           |
+| 16  | 待完成 | 定时/延时消息                        |
 
 
 <br>
@@ -87,6 +90,11 @@ compression-type: "snappy"
 
 ## 参考地址：
 
+* [kafka单节点的安装，部署，使用](https://www.cnblogs.com/biehongli/p/10216309.html)
+* [kafka 单机部署](https://www.jianshu.com/p/a743712beda5)
+* [Kafka单机版部署](https://www.cnblogs.com/szx666/p/14635910.html)
+* [linux系统下kafka单机部署](https://www.modb.pro/db/185916)
+* [Kafka单机版安装](https://developer.aliyun.com/article/1164146)
 * [Kafka发送消息和消费消息的方式](https://blog.csdn.net/qq_37958845/article/details/105675131)
 * [Kafka重试机制](https://www.51cto.com/article/722619.html)
 * [Spring Kafka：Retry Topic、DLT 的使用与原理](https://zhuanlan.zhihu.com/p/554967177)
