@@ -5,36 +5,33 @@
 
 ## 项目
 
-| #   | 目录           | 说明                             |
-|-----|-------------------------------|--------------------------------|
-| 1   | [kafka-demo1](./kafka-demo1)  | 原生用例                           |
-| 2   | [kafka-demo2](./kafka-demo2)  | 简单发送/接收消息                      |
-| 3   | [kafka-demo3](./kafka-demo3)  | 发送消息时获取发送结果(同步/异步)             |
-| 4   | [kafka-demo4](./kafka-demo4)  | 发送事务消息                         |
-| 5   | [kafka-demo5](./kafka-demo5)  | Ack模式 - 单记录消费自动提交 offset       |
-| 6   | [kafka-demo6](./kafka-demo6)  | Ack模式 - 单记录消费手动提交 offset （ack） |
-| 7   | [kafka-demo7](./kafka-demo7)  | Ack模式 - 批量消费自动提交 offset （ack）  |
-| 8   | [kafka-demo8](./kafka-demo8)  | Ack模式 - 批量消费手动提交 offset （ack）  |
-| 9   | [kafka-demo9](./kafka-demo9)  | 转发消息                           |
-| 10  | [kafka-demo10](./kafka-demo10) | 获取消息回复                         |
-| 11  | [kafka-demo11](./kafka-demo11) | 序列化/反序列化                       |
-| 12  | [kafka-demo12](./kafka-demo12) | 多方法处理消息                        |
-| 13  | [kafka-demo13](./kafka-demo13) | 异常处理                           |
-| 14  | [kafka-demo14](./kafka-demo14) | 消息重试与死信队列(@Bean)               |
-| 15  | [kafka-demo15](./kafka-demo15) | 消息重试与死信队列（注解）                  |
-| 16  | 待完成 | 二次封装                           |
-| 16  | 待完成 | stream                         |
-| 16  | 待完成 | 架构封装                           |
-| 16  | 待完成 | 定时/延时消息                        |
-
+| #   | 目录                             | 说明                     |
+|-----|--------------------------------|------------------------|
+| 1   | [kafka-demo1](./kafka-demo1)   | 原生用例                   |
+| 2   | [kafka-demo2](./kafka-demo2)   | 简单发送/接收消息              |
+| 3   | [kafka-demo3](./kafka-demo3)   | 发送消息时获取发送结果(同步/异步)     |
+| 4   | [kafka-demo4](./kafka-demo4)   | 发送事务消息                 |
+| 5   | [kafka-demo5](./kafka-demo5)   | 单记录消费自动提交 offset       |
+| 6   | [kafka-demo6](./kafka-demo6)   | 单记录消费手动提交 offset （ack） |
+| 7   | [kafka-demo7](./kafka-demo7)   | 批量消费自动提交 offset （ack）  |
+| 8   | [kafka-demo8](./kafka-demo8)   | 批量消费手动提交 offset （ack）  |
+| 9   | [kafka-demo9](./kafka-demo9)   | 转发消息                   |
+| 10  | [kafka-demo10](./kafka-demo10) | 获取消息回复                 |
+| 11  | [kafka-demo11](./kafka-demo11) | 序列化/反序列化               |
+| 12  | [kafka-demo12](./kafka-demo12) | 多方法处理消息                |
+| 13  | [kafka-demo13](./kafka-demo13) | 异常处理                   |
+| 14  | [kafka-demo14](./kafka-demo14) | 消息重试与死信队列(@Bean)       |
+| 15  | [kafka-demo15](./kafka-demo15) | 消息重试与死信队列（注解）          |
+| 16  | [kafka-demo16](./kafka-demo16) | 消息过滤器                  |
+| 17  | [kafka-demo17](./kafka-demo17) | 定时启动/停止监听器             |
+| 16  | 待完成                            | 二次封装                   |
+| 16  | 待完成                            | stream                 |
+| 16  | 待完成                            | 架构封装                   |
+| 16  | 待完成                            | 定时/延时消息                |
 
 <br>
 <br>
 <br>
-
-
-
-
 
 ## 生产者如何提高吞吐量
 
@@ -51,23 +48,18 @@ buffer-memory: 33554432
 compression-type: "snappy"
 ```
 
-
 <br>
 <br>
-
-
 
 ## 生产者数据可靠
 
-数据完全可靠条件 = ACK级别设置为-1 + 分区副本大于等于2 + ISR里应答的最小副本数量大于等于2 
+数据完全可靠条件 = ACK级别设置为-1 + 分区副本大于等于2 + ISR里应答的最小副本数量大于等于2
 
 幂等性（参数 enable.idempotence 默认为 true）、事务
 
 
 <br>
 <br>
-
-
 
 ## 消费者如何提高吞吐量
 
@@ -80,13 +72,9 @@ compression-type: "snappy"
 <br>
 <br>
 
-
-
 ## 重复消费和漏消费
 
 如果想完成Consumer端的精准一次性消费，那么需要Kafka消费端将消费过程和提交offset（手动提交）过程做原子绑定。此时我们需要将Kafka的offset保存到支持事务的自定义介质（比如MySQL）
-
-
 
 ## 参考地址：
 

@@ -1,18 +1,9 @@
 package com.xh.kafka.example;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.config.KafkaListenerContainerFactory;
-import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
-import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,9 +16,9 @@ import java.util.List;
 @Component
 public class ConsumerExample {
 
-    @KafkaListener(topics = "test_topic")
-    public void onMessage(List<String> messages) {
-        log.info("=========================================");
+    @KafkaListener(topics = "bath_topic")
+    public void onMessage(List<String> list) {
+        log.info("Number of received message lines: {}", list.size());
     }
 
 }

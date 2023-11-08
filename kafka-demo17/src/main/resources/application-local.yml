@@ -1,12 +1,10 @@
 spring:
   kafka:
     bootstrap-servers: 192.168.200.11:9092
-    producer:
-      #这个参数可以是任意字符串，它是broker用来识别消息是来自哪个客户端的。在broker进行打印日志、衡量指标或者配额限制时会用到。
-      clientId: ${spring.application.name} #方便kafkaserver打印日志定位请求来源
-      # 发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
-      retries: 3
     #消费者的配置
     consumer:
       #在/usr/local/etc/kafka/consumer.properties中有配置
       group-id: test_group
+      auto-offset-reset: earliest
+    listener:
+      idle-event-interval: 5000

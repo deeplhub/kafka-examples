@@ -1,20 +1,39 @@
 spring:
   kafka:
     bootstrap-servers: 192.168.200.11:9092
+    producer:
+      #这个参数可以是任意字符串，它是broker用来识别消息是来自哪个客户端的。在broker进行打印日志、衡量指标或者配额限制时会用到。
+      clientId: ${spring.application.name} #方便kafkaserver打印日志定位请求来源
+      # 发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
+      retries: 3
+      # 批量大小，同一批次内存大小（默认16K=16384）
+      batch-size: 16384
+      # 生产者内存缓存区大小(300M = 300*1024*1024)
+      buffer-memory: 314572800
+      # 额外的，没有直接与properties对应的参数，将存放到下面这个Map对象中，一并初始化
+      properties:
+        # 提交延时
+        # 当生产端积累的消息达到batch-size或超过linger.ms设置的这个毫秒时间,生产者就会将消息提交给kafka
+        # linger.ms为0表示每接收到一条消息就提交给kafka,这时候batch-size其实就没用了
+        linger.ms: 100000
     #消费者的配置
     consumer:
       #在/usr/local/etc/kafka/consumer.properties中有配置
       group-id: test_group
       # false 取消自动提交
       enable-auto-commit: false
-      # 批量消费的单次最大消费记录数
-      max-poll-records: 50
-      listener:
-        # listener类型为批量记录batch类型
-        type: batch
-        # 已消费offset提交模式（仅在enable-auto-commit=false时才需明确指定）
-        # 单记录  | 批量         | 超时  | 超过消费数量 | 超时或超过数量 | 手动提交（ack）后同BATCH | 手动立即提交
-        # RECORD | BATCH（默认） | TIME | COUNT      | COUNT_TIME   | MANUAL                | MANUAL_IMMEDIATE
-        # 注：listener自动提交offset模式包括：RECORD | BATCH | TIME | COUNT | COUNT_TIME ，
-        #    且使用相关自动模式不可在@KafkaListener标注方法中使用Acknowledgment参数
-        ack-mode: batch
+      # 批量消费每次最多消费记录数，默认500。这里设置的值并非达到20000条消息才消费，而是说一次poll最多返回的记录数为20000。
+      max-poll-records: 10000
+    listener:
+      # listener类型为批量记录batch类型
+      type: batch
+      # 指定 listener 容器中的线程数，用于提高并发量
+      # 注意：并发量根据实际分区数决定，必须小于等于分区数，否则会有线程一直处于空闲状态。
+      # 例如:设置concurrency为3，也就是将会启动3条线程进行监听，而要监听的topic有5个partition，意味着将有2条线程都是分配到2个partition，还有1条线程分配到1个partition。
+      concurrency: 3
+      # 已消费offset提交模式（仅在enable-auto-commit=false时才需明确指定）
+      # 单记录  | 批量         | 超时  | 超过消费数量 | 超时或超过数量 | 手动提交（ack）后同BATCH | 手动立即提交
+      # RECORD | BATCH（默认） | TIME | COUNT      | COUNT_TIME   | MANUAL                | MANUAL_IMMEDIATE
+      # 注：listener自动提交offset模式包括：RECORD | BATCH | TIME | COUNT | COUNT_TIME ，
+      #    且使用相关自动模式不可在@KafkaListener标注方法中使用Acknowledgment参数
+      ack-mode: batch

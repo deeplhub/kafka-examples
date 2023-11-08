@@ -1,4 +1,4 @@
-# Ack模式 - 单记录消费自动提交 offset （ack）
+# 单记录消费自动提交 offset （ack）
 
 
 Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.type配置）：

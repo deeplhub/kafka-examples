@@ -1,11 +1,8 @@
-高版本
+# 消息过滤器
 
+## 原理
 
+消息过滤器在消息抵达 consumer 之前被拦截，过滤器根据系统业务逻辑去筛选出需要的数据再交由 KafkaListener 处理。
 
+配置消息过滤只需要为监听器工厂 配置一个 RecordFilterStrategy（消息过滤策略），返回true的时候消息将会被抛弃，返回false时，消息能正常抵达监听容器。
 
-注解属性说明：
-
-* attempts：重试次数，默认为3。
-* @Backoff delay：消费延迟时间，单位为毫秒。
-* @Backoff multiplier：延迟时间系数，此例中 attempts = 4， delay = 5000， multiplier = 2 ，则间隔时间依次为5s、10s、20s、40s，最大延迟时间受 maxDelay 限制。
-* fixedDelayTopicStrategy：可选策略包括：SINGLE_TOPIC 、MULTIPLE_TOPICS

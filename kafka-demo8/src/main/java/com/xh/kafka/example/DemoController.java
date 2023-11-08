@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.stream.IntStream;
 
 /**
  * @author H.Yang
@@ -18,26 +19,29 @@ public class DemoController {
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @GetMapping("/send1")
-    public String sendMessage1() {
-        // 这里Topic如果不存在，会自动创建
-        kafkaTemplate.send("test1_topic", "测试消息1...");
+    @GetMapping("/sendBath1")
+    public String sendBath1() {
+        IntStream.range(1, 100000).forEach(i -> {
+            kafkaTemplate.send("bath_topic", "hello world: " + i);
+        });
 
         return "success";
     }
 
-    @GetMapping("/send2")
-    public String sendMessage2() {
-        // 这里Topic如果不存在，会自动创建
-        kafkaTemplate.send("test2_topic", "测试消息2...");
+    @GetMapping("/sendBath2")
+    public String sendBath2() {
+        IntStream.range(1, 100000).forEach(i -> {
+            kafkaTemplate.send("bath_topic", "hello world: " + i);
+        });
 
         return "success";
     }
 
-    @GetMapping("/send3")
-    public String sendMessage3() {
-        // 这里Topic如果不存在，会自动创建
-        kafkaTemplate.send("test3_topic", "测试消息3...");
+    @GetMapping("/sendBath3")
+    public String sendBath3() {
+        IntStream.range(1, 100000).forEach(i -> {
+            kafkaTemplate.send("bath_topic", "hello world: " + i);
+        });
 
         return "success";
     }

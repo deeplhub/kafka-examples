@@ -1,4 +1,4 @@
-# Ack模式 - 批量消费自动提交 offset （ack）
+# 批量消费自动提交 offset （ack）
 
 
 Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.type配置）：
@@ -7,21 +7,10 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 * batch - 批量消费消息列表
 
 
-
-<br>
-
-
-
 每种模式都分为2种提交已消费消息offset的ack模式：
 
 * 自动确认
 * 手动确认
-
-
-
-<br>
-<br>
-
 
 
 ## ack-mode模式
@@ -39,13 +28,6 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 
 
 
-
-<br>
-<br>
-<br>
-
-
-
 # ack-mode设置
 
 自动提交 ack-mode 模式包括：RECORD | BATCH | TIME | COUNT | COUNT_TIME ， 且使用相关自动模式不可在 @KafkaListener 标注方法中使用 Acknowledgment 参数。
@@ -53,8 +35,6 @@ Spring Kafka消费消息的模式分为2种模式（对应spring.kafka.listener.
 
 手动提交 ack-mode 模式包括：MANUAL | MANUAL_IMMEDIATE， 且使用相关手动模式需在 @KafkaListener 标注方法中使用 Acknowledgment 参数。
 
-<br>
-<br>
 
 
 ## 关于消费者提交已消费消息offset的相关配置说明：
@@ -69,11 +49,6 @@ auto-commit-interval 设置自动提交间隔
 
 spring.kafka.listener.ack-mode 已消费offset提交模式
 
-
-
-<br>
-<br>
-<br>
 
 
 
