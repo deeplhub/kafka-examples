@@ -8,6 +8,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 /**
+ * 重试不靠配置，由实现类配置
+ *
  * @author H.Yang
  * @date 2023/4/20
  */

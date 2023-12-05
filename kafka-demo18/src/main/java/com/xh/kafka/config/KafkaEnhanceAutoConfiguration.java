@@ -30,6 +30,7 @@ public class KafkaEnhanceAutoConfiguration {
         return new KafkaEnhanceTemplate(kafkaTemplate);
     }
 
+    // FIXME 增强的RocketMQEnhanceTemplate下不生效
     @Bean
     public ErrorHandler kafkaErrorHandler(KafkaTemplate<?, ?> template) {
         log.info("kafkaErrorHandler begin to Handle");

@@ -75,11 +75,11 @@ public abstract class EnhanceMessageHandler<K, V extends BaseMessageModel> {
     /**
      * 最大重试次数
      *
-     * @return 最大重试次数，默认5次
+     * @return 最大重试次数，默认2次，再加载发送那次，一共3次
      */
 
     protected int maxRetryTimes() {
-        return 5;
+        return 2;
     }
 
     /**
