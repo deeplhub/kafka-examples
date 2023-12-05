@@ -24,7 +24,7 @@
 | 15  | [kafka-demo15](./kafka-demo15) | 消息重试与死信队列（注解）          |
 | 16  | [kafka-demo16](./kafka-demo16) | 消息过滤器                  |
 | 17  | [kafka-demo17](./kafka-demo17) | 定时启动/停止监听器             |
-| 16  | 待完成                            | 二次封装                   |
+| 16  | [kafka-demo17](./kafka-demo18) | 二次封装                   |
 | 16  | 待完成                            | stream                 |
 | 16  | 待完成                            | 架构封装                   |
 | 16  | 待完成                            | 定时/延时消息                |
