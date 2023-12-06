@@ -84,6 +84,16 @@ public abstract class EnhanceMessageHandler<K, V extends BaseMessageModel> {
     }
 
     /**
+     * 获取延迟时间，默认延迟3秒
+     *
+     * @return 默认延迟3秒
+     */
+
+    protected int getDelaySeconds() {
+        return 3;
+    }
+
+    /**
      * 使用模板模式构建消息消费框架，可自由扩展或删减
      *
      * @param record
@@ -135,7 +145,7 @@ public abstract class EnhanceMessageHandler<K, V extends BaseMessageModel> {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         try {
             // TODO 这里需要增加延迟消费
-            scheduledExecutorService.schedule(() -> enhanceTemplate.getTemplate().send(record.topic(), message), 3, TimeUnit.SECONDS);
+            scheduledExecutorService.schedule(() -> enhanceTemplate.getTemplate().send(record.topic(), message), this.getDelaySeconds(), TimeUnit.SECONDS);
         } catch (Exception ex) {
             // 此处捕获之后，相当于此条消息被消息完成然后重新发送新的消息
             throw new RuntimeException(ex);
