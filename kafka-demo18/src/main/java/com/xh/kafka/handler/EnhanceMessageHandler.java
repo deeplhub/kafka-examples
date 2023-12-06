@@ -4,11 +4,12 @@ import com.xh.kafka.model.BaseMessageModel;
 import com.xh.kafka.templete.KafkaEnhanceTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
 import java.time.Instant;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 抽象消息监听器，封装了所有公共处理业务，如：基础日志记录、异常处理、消息重试、警告通知
@@ -131,23 +132,17 @@ public abstract class EnhanceMessageHandler<K, V extends BaseMessageModel> {
         }
         message.setRetryTimes(message.getRetryTimes() + 1);
 
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         try {
             // TODO 这里需要增加延迟消费
-            enhanceTemplate.getTemplate().send(record.topic(), message).addCallback(new ListenableFutureCallback<SendResult<K, V>>() {
-                @Override
-                public void onSuccess(SendResult<K, V> result) {
-                    log.info("发送消息成功，{} - {} -{}", result.getRecordMetadata().topic(), result.getRecordMetadata().partition(), result.getRecordMetadata().offset());
-                }
-
-                // 在回调中设置延迟发送
-                @Override
-                public void onFailure(Throwable throwable) {
-                    log.error("消息发送失败", throwable);
-                }
-            });
+            scheduledExecutorService.schedule(() -> enhanceTemplate.getTemplate().send(record.topic(), message), 3, TimeUnit.SECONDS);
         } catch (Exception ex) {
             // 此处捕获之后，相当于此条消息被消息完成然后重新发送新的消息
             throw new RuntimeException(ex);
+        } finally {
+            scheduledExecutorService.shutdown();
         }
     }
+
+
 }

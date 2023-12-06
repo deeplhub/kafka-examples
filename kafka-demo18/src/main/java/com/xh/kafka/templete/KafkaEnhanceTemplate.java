@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 /**
  * RocketMQ模板类
@@ -50,6 +51,21 @@ public class KafkaEnhanceTemplate<K, V> {
 
         log.info("[{}]同步消息[{}]发送结果[{}]", sendResult.getRecordMetadata().topic(), message, JSONUtil.toJsonStr(sendResult));
         return sendResult;
+    }
+
+    public void send(String topic, V message) {
+        kafkaTemplate.send(topic, message).addCallback(new ListenableFutureCallback<SendResult<K, V>>() {
+            @Override
+            public void onSuccess(SendResult<K, V> result) {
+                log.info("发送消息成功，{} - {} -{}", result.getRecordMetadata().topic(), result.getRecordMetadata().partition(), result.getRecordMetadata().offset());
+            }
+
+            // 在回调中设置延迟发送
+            @Override
+            public void onFailure(Throwable throwable) {
+                log.error("消息发送失败", throwable);
+            }
+        });
 
     }
 
