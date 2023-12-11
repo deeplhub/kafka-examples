@@ -23,14 +23,14 @@ import org.springframework.util.backoff.FixedBackOff;
 public class KafkaEnhanceAutoConfiguration {
 
     /**
-     * 注入增强的RocketMQEnhanceTemplate
+     * 注入增强的KafkaEnhanceTemplate
      */
     @Bean
     public KafkaEnhanceTemplate kafkaEnhanceTemplate(KafkaTemplate kafkaTemplate) {
         return new KafkaEnhanceTemplate(kafkaTemplate);
     }
 
-    // FIXME 增强的RocketMQEnhanceTemplate下不生效
+    // FIXME 增强的KafkaEnhanceTemplate下不生效
     @Bean
     public ErrorHandler kafkaErrorHandler(KafkaTemplate<?, ?> template) {
         log.info("kafkaErrorHandler begin to Handle");
